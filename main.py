@@ -26,9 +26,8 @@ def isbn13to10(isbn13: str):
     return f"{isbn_base}{cd}"
 
 
-def get_bibliography_df(fil_df: DataFrame,
+def get_bibliography_df(title_list: list,
                         params: list, keywords: list) -> DataFrame:
-    title_list: list = list(fil_df.title)
     api = NationalDietLibrary()
     df: DataFrame = DataFrame()
     for html, keyword in api.get_bibliography(params=params, keywords=keywords):
@@ -74,7 +73,7 @@ def main():
         # Get the latest bibliographic information
         db_df: DataFrame = sqlite_db.get_table()
         df: DataFrame = get_bibliography_df(
-            fil_df=db_df,
+            title_list=list(db_df.title),
             params=api_settings["params"],
             keywords=api_settings["keywords"],
         )
