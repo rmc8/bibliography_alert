@@ -1,0 +1,18 @@
+version: 2.1
+settings:
+  api:
+    keywords:
+      - Python
+      - Google Apps Script
+    params:
+      - title
+      - description
+  google:
+    account:
+      user: @gmail.com
+      password:
+    gmail:
+      to: ""
+      cc: ""
+      bcc: ""
+      subject: ""
