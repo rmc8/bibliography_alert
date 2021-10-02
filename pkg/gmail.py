@@ -1,5 +1,6 @@
 import os
-import smtplib, ssl
+import ssl
+import smtplib
 from typing import Optional, List
 from dataclasses import dataclass
 
