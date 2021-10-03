@@ -19,7 +19,7 @@ def _check_digit(cd_sum: int) -> str:
     return str(cd_num)
 
 
-def isbn13to10(isbn13: str):
+def isbn13to10(isbn13: str) -> str:
     isbn_base = isbn13[3:12]
     cd_sum: int = sum([int(n) * (10 - i) for i, n in enumerate(isbn_base)])
     cd: str = _check_digit(cd_sum)

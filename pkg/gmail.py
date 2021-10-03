@@ -2,7 +2,6 @@ import os
 import ssl
 import smtplib
 from typing import Optional, List
-from dataclasses import dataclass
 
 from email.utils import formatdate
 from email.mime.text import MIMEText
@@ -10,7 +9,6 @@ from email.mime.multipart import MIMEMultipart
 from email.mime.application import MIMEApplication
 
 
-@dataclass
 class Gmail:
     def __init__(self, from_: str, to: Optional[str] = None, cc: Optional[str] = None,
                  bcc: Optional[str] = None, subject: str = "", body: str = "",
