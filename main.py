@@ -28,17 +28,17 @@ def isbn13to10(isbn13: str):
 
 def get_bibliography_df(title_list: list,
                         params: list, keywords: list) -> DataFrame:
-    api = NationalDietLibrary()
+    api = NationalDietLibrary(offset=90)
     df: DataFrame = DataFrame()
     for html, keyword in api.get_bibliography(params=params, keywords=keywords):
         bs = BeautifulSoup(html, "lxml-xml")
         for html_record in bs.find_all("record"):
-            raw_title = html_record.find("dc:title").text
-            title = raw_title.replace("　", " ")
-            author = html_record.find("dc:creator").text
-            if not df.empty and title in df.title.tolist():
+            raw_title = None if (elm := html_record.find("dc:title")) is None else elm.text
+            if raw_title is None:
                 continue
-            elif title in title_list:
+            title = raw_title.replace("　", " ")
+            author = None if (elm := html_record.find("dc:creator")) is None else elm.text
+            if title in title_list or (not df.empty  and title in df.title.tolist()):
                 continue
             time.sleep(1)
             isbn: Optional[str] = api.get_isbn(title=title)
