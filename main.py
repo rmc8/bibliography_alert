@@ -38,7 +38,7 @@ def get_bibliography_df(title_list: list,
                 continue
             title = raw_title.replace("　", " ")
             author = None if (elm := html_record.find("dc:creator")) is None else elm.text
-            if title in title_list or (not df.empty  and title in df.title.tolist()):
+            if title in title_list or (not df.empty and title in df.title.tolist()):
                 continue
             time.sleep(1)
             isbn: Optional[str] = api.get_isbn(title=title)
